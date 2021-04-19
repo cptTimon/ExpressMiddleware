@@ -4,15 +4,22 @@ const path = require('path');
 const app = express();
 
 app.use((req,res,next) => {
-  res.showView = (name) => res.sendFile(path.join(__dirname, `/views/${name}`));
+  res.showView = (name) => {
+    res.sendFile(path.join(__dirname, `/views/${name}`));
+  };
   next();
 });
 
 app.use(express.static(path.join(__dirname, '/public')));
 
-app.use('/user', (req,res) => {
+app.use('/user/panel', (req,res) => {
   res.showView('login.html');
 });
+
+app.use('/user/settings', (req,res) => {
+  res.showView('login.html');
+});
+
 
 app.get('/', (req, res) => {
   res.showView('home.html');
